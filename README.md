@@ -1,4 +1,4 @@
-# torch-poet
+# torch-poet: a PyTorch char-rnn implementation
 This is a PyTorch implemention along the ideas of Andrej Karpathy's [char-rnn](https://github.com/karpathy/char-rnn) as described in '[The Unreasonable Effectiveness of Recurrent Neural Networks](http://karpathy.github.io/2015/05/21/rnn-effectiveness/)'.
 
 ## Overview

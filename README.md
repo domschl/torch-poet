@@ -11,12 +11,13 @@ how similar the generated and original texts are.
 
 ## Requirements
 
-* PyTorch (0.3.1)
+* PyTorch (0.4)
 * Python 3
 * Jupyter Notebook
 
 ## History
 
+* 2018-05-13: adapted for PyTorch 0.4
 * 2018-03-02: adapted for PyTorch 0.3.1
 
 ## References

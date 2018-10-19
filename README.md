@@ -17,7 +17,7 @@ how similar the generated and original texts are.
 
 ## History
 
-* 2018-10-17: retested with PyTorch 1.0rc3, ok, no changes necessary.
+* 2018-10-17: retested with PyTorch 1.0rc1, ok, no changes necessary.
 * 2018-05-13: adapted for PyTorch 0.4
 * 2018-03-02: adapted for PyTorch 0.3.1
 

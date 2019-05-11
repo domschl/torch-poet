@@ -19,9 +19,9 @@ how similar the generated and original texts are.
 
 <a href="https://colab.research.google.com/github/domschl/torch-poet/blob/master/torch_poet.ipynb"><img src="https://www.tensorflow.org/images/colab_logo_32px.png" height="12" width="12" /> Run notebook in Google Colab</a>
 
-## Requirements
+## Requirements to run locally
 
-* PyTorch (0.4 or 1.0)
+* PyTorch (1.x)
 * Python 3
 * Jupyter Notebook
 

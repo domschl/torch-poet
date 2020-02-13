@@ -27,6 +27,7 @@ how similar the generated and original texts are.
 
 ## History
 
+* 2020-02-13: PyTorch 1.4, women literature default texts.
 * 2019-05-11: Pytorch 1.1, support for running on Google Colab.
 * 2018-10-17: retested with PyTorch 1.0rc1, ok, no changes necessary.
 * 2018-05-13: adapted for PyTorch 0.4

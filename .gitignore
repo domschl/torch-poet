@@ -3,4 +3,5 @@ data/lib.*
 *.tar
 lsp.log
 *.txt
+*.json
 

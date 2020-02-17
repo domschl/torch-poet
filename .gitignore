@@ -4,4 +4,4 @@ data/lib.*
 lsp.log
 *.txt
 *.json
-
+gutenberg_cache/

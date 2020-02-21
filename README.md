@@ -29,6 +29,8 @@ Training and generation can either happen on Google Colab or on a standard local
 
 ## History
 
+* ongoing: support for direct Project Gutenberg queries for training data generation, various optimizations,
+  usage of torch dataloaders.
 * 2020-02-13: PyTorch 1.4, women literature default texts. Saving/Restoring model data
 * 2019-05-11: Pytorch 1.1, support for running on Google Colab.
 * 2018-10-17: retested with PyTorch 1.0rc1, ok, no changes necessary.

@@ -56,7 +56,7 @@ book_text=gbl.load_book('25830')  # ebook_id  (Note: this ID is *not* always num
 # Filter text (tries to statistically remove non-book content)
 clean_text=gbl.filter_text(book_text)
 
-# Free search is possible with `gbl.search("multilpe keywords")
+# Free search is possible with `gbl.find_keywords("keyword", "more keywords", ...)
 ```
 
 ### 2. Training pipeline

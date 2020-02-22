@@ -21,7 +21,43 @@ Training and generation can either happen on Google Colab or on a standard local
 
 ### 1. Books from Project Gutenberg
 
-The notebook searches the Project Gutenberg library for books of given authors, languages and/or keywords. A list of matching books is compiled, downloaded, and prepared for the training pipeline. On local jupyter installations downloads from Project Gutenberg are cached locally, for Colab Notebooks, the notebook will ask to authorize a connection to the user's Google Drive. The Google Drive connection is used to 1. cache downloaded text documents and to 2. store training snapshots. All activity is only within the `Colab Notebooks/<project name>` path. The project name is defined at the beginning of the notebook and serves to differentiate between different training configurations and datasets.
+The notebook searches the Project Gutenberg library for books of given authors, languages and/or keywords. A list of matching books is compiled, downloaded, and prepared for the training pipeline. On local jupyter installations downloads from Project Gutenberg are cached locally, for Colab Notebooks, the notebook will ask to authorize a connection to the user's Google Drive. The Google Drive connection is used to 1. cache downloaded text documents and to 2. store training snapshots. All activity is only within the `Colab Notebooks/<project name>` and `gutenberg_cache` paths. The project name is defined at the beginning of the notebook and serves to differentiate between different training configurations and datasets.
+
+```python
+# Sample to search, download and filter ebooks from Project Gutenberg:
+gbl=GutenbergLib(cache_dir='gutenberg_cache')
+gbl.load_index()
+
+# Search for books by authors locke and descartes in English:
+book_list=gbl.search({"author": ["john locke", "descartes"], "language": ["english"]})
+
+# Output:
+[{'title': 'Discourse of a Method for the Well Guiding of Reason',
+  'ebook_id': '25830',
+  'author': 'Rene Descartes',
+  'subtitle': 'and the Discovery of Truth in the Sciences',
+  'language': 'English'},
+ {'title': 'Second Treatise of Government',
+  'ebook_id': '7370',
+  'author': 'John Locke',
+  'language': 'English'},
+ {'title': 'Selections From The Principles of Philosophy',
+  'ebook_id': '4391',
+  'author': 'Rene Descartes',
+  'language': 'English'},
+ {'title': 'A Discourse on Method',
+  'ebook_id': '59',
+  'author': 'René Descartes',
+  'language': 'English'}]
+
+# Download a book: (either from web or cache directory `gutenberg_cache`)
+book_text=gbl.load_book('25830')  # ebook_id  (Note: this ID is *not* always numeric!)
+
+# Filter text (tries to statistically remove non-book content)
+clean_text=gbl.filter_text(book_text)
+
+# Free search is possible with `gbl.search("multilpe keywords")
+```
 
 ### 2. Training pipeline
 

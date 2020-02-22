@@ -17,6 +17,26 @@ how similar the generated and original texts are.
 
 Training and generation can either happen on Google Colab or on a standard local or remote jupyter instance.
 
+## Structure
+
+### 1. Books from Project Gutenberg
+
+The notebook searches the Project Gutenberg library for books of given authors, languages and/or keywords. A list of matching books is compiled, downloaded, and prepared for the training pipeline. On local jupyter installations downloads from Project Gutenberg are cached locally, for Colab Notebooks, the notebook will ask to authorize a connection to the user's Google Drive. The Google Drive connection is used to 1. cache downloaded text documents and to 2. store training snapshots. All activity is only within the `Colab Notebooks/<project name>` path. The project name is defined at the beginning of the notebook and serves to differentiate between different training configurations and datasets.
+
+### 2. Training pipeline
+
+The selected book library is then converted into a Torch `Dataset` that resides on the gpu (if available) and is fed into the model using torch `DataLoader`.
+
+### 3. Training
+
+The model can be configured for an arbitrary number of LSTM layers. By default, every 3 minutes, training statistics are shown and a training snapshot is generated, and every 10 minutes (as soon as loss is below 1.5), sample text is generated.
+
+Training can be interrupted at any point, and on restart, the last available snapshot is automatically loaded and training is continued. This is especially handy for Colab sessions which can be interrupted at any time. Snapshots of Colab trainings reside on the user's Google Drive and are thus persistent over session resets.
+
+### 4. Generation of Text and 'Dialog'
+
+At any point, training can be interrupted, and the snapshot that yielded highest precision can be loaded for text generation.
+
 ### Run notebook in Google Colab
 
 <a href="https://colab.research.google.com/github/domschl/torch-poet/blob/master/torch_poet.ipynb"><img src="https://www.tensorflow.org/images/colab_logo_32px.png" height="12" width="12" /> Run notebook in Google Colab</a>

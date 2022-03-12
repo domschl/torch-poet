@@ -21,53 +21,29 @@ Training and generation can either happen on Google Colab or on a standard local
 
 ### 1. Books from Project Gutenberg
 
-The notebook searches the Project Gutenberg library for books of given authors, languages and/or keywords. A list of matching books is compiled, downloaded, and prepared for the training pipeline. On local jupyter installations downloads from Project Gutenberg are cached locally, for Colab Notebooks, the notebook will ask to authorize a connection to the user's Google Drive. The Google Drive connection is used to 1. cache downloaded text documents and to 2. store training snapshots. All activity is only within the `Colab Notebooks/<project name>` and `gutenberg_cache` paths. The project name is defined at the beginning of the notebook and serves to differentiate between different training configurations and datasets.
+The notebook uses the [`ml_indie_tools`](https://github.com/domschl/ml-indie-tools) project to access the Project Gutenberg library for books of given authors, 
+languages and/or keywords. A list of matching books is compiled, downloaded, and prepared for the training pipeline. 
+On local jupyter installations downloads from Project Gutenberg are cached locally, for Colab Notebooks, the notebook 
+will ask to authorize a connection to the user's Google Drive. The Google Drive connection is used to 1. cache 
+downloaded text documents and to 2. store training snapshots. 
+All activity is only within the `Colab Notebooks/<project name>` and `gutenberg_cache` paths. 
+The project name is defined at the beginning of the notebook and serves to differentiate between different training 
+configurations and datasets.
 
-```python
-# Sample to search, download and filter ebooks from Project Gutenberg:
-gbl=GutenbergLib(cache_dir='gutenberg_cache')
-gbl.load_index()
-
-# Search for books by authors locke and descartes in English:
-book_list=gbl.search({"author": ["john locke", "descartes"], "language": ["english"]})
-
-# Output:
-[{'title': 'Discourse of a Method for the Well Guiding of Reason',
-  'ebook_id': '25830',
-  'author': 'Rene Descartes',
-  'subtitle': 'and the Discovery of Truth in the Sciences',
-  'language': 'English'},
- {'title': 'Second Treatise of Government',
-  'ebook_id': '7370',
-  'author': 'John Locke',
-  'language': 'English'},
- {'title': 'Selections From The Principles of Philosophy',
-  'ebook_id': '4391',
-  'author': 'Rene Descartes',
-  'language': 'English'},
- {'title': 'A Discourse on Method',
-  'ebook_id': '59',
-  'author': 'René Descartes',
-  'language': 'English'}]
-
-# Download a book: (either from web or cache directory `gutenberg_cache`)
-book_text=gbl.load_book('25830')  # ebook_id  (Note: this ID is *not* always numeric!)
-
-# Filter text (tries to statistically remove non-book content)
-clean_text=gbl.filter_text(book_text)
-
-# Free search is possible with `gbl.find_keywords("keyword", "more keywords", ...)
-```
+Please refer to [`ml_indie_tools`](https://github.com/domschl/ml-indie-tools) for more details.
 
 ### 2. Training pipeline
 
-The selected book library is then converted into a Torch `Dataset` that resides on the gpu (if available) and is fed into the model using torch `DataLoader`.
+The selected book library is then converted into a Torch `Dataset` that resides on the gpu (if available) and 
+is fed into the model using torch `DataLoader`.
 
 ### 3. Training
 
-The model can be configured for an arbitrary number of LSTM layers. By default, every 3 minutes, training statistics are shown and a training snapshot is generated, and every 10 minutes (as soon as loss is below 1.5), sample text is generated.
+The model can be configured for an arbitrary number of LSTM layers. By default, every 3 minutes, training statistics 
+are shown and a training snapshot is generated, and every 10 minutes (as soon as loss is below 1.5), sample text is generated.
 
-Training can be interrupted at any point, and on restart, the last available snapshot is automatically loaded and training is continued. This is especially handy for Colab sessions which can be interrupted at any time. Snapshots of Colab trainings reside on the user's Google Drive and are thus persistent over session resets.
+Training can be interrupted at any point, and on restart, the last available snapshot is automatically loaded and 
+training is continued. This is especially handy for Colab sessions which can be interrupted at any time. Snapshots of Colab trainings reside on the user's Google Drive and are thus persistent over session resets.
 
 ### 4. Generation of Text and 'Dialog'
 
@@ -85,6 +61,7 @@ At any point, training can be interrupted, and the snapshot that yielded highest
 
 ## History
 
+* 2022-03-12: [`ml_indie_tools`](https://github.com/domschl/ml-indie-tools) is used for Projekt Gutenberg access.
 * ongoing: support for direct Project Gutenberg queries for training data generation, various optimizations,
   usage of torch dataloaders.
 * 2020-02-13: PyTorch 1.4, women literature default texts. Saving/Restoring model data
@@ -99,3 +76,6 @@ At any point, training can be interrupted, and the snapshot that yielded highest
 * [The Unreasonable Effectiveness of Recurrent Neural Networks](http://karpathy.github.io/2015/05/21/rnn-effectiveness/)
 * See [tensor-poet](https://github.com/domschl/tensor-poet) for a similar implementation, using Tensorflow.
 * See [rnnreader](https://github.com/domschl/syncognite/tree/master/rnnreader) for a pure C++ implementation of the same idea.
+* [`ml_indie_tools`](https://github.com/domschl/ml-indie-tools): Gutenberg access and boiler-plate.
+* [transformer-poet](https://github.com/domschl/transformer-poet) for a transformer based implementation (tensorflow).
+

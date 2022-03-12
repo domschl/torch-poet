@@ -59,6 +59,14 @@ At any point, training can be interrupted, and the snapshot that yielded highest
 * Python 3
 * Jupyter Notebook
 
+## Performance
+
+Model: 2x256, 64 steps
+
+* Nvidia 1080ti: 0.00011 sec/sample
+* Tesla V4 (Colab): 0.00012 sec/sample
+* Apple M1 (CPU): 0.0032 sec/sample (Note: at the time of tests there was no pytorch version that supports M1 GPU, hence the very slow result)
+
 ## History
 
 * 2022-03-12: [`ml_indie_tools`](https://github.com/domschl/ml-indie-tools) is used for Projekt Gutenberg access.

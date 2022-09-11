@@ -65,10 +65,11 @@ Model: 2x256, 64 steps
 
 * Nvidia 1080ti: 0.00011 sec/sample
 * Tesla V4 (Colab): 0.00012 sec/sample
-* Apple M1 (CPU): 0.0032 sec/sample (Note: at the time of tests there was no pytorch version that supports M1 GPU, hence the very slow result)
+* Apple M1 (CPU): 0.0032 sec/sample (Note: at the time of tests there was no pytorch version that supports M1 GPU, hence the very slow result, update 09/2022: while there is now (09/2022) an implementation with GPU support, is crashes during LSTM backward path, so can't be tested, s.b.)
 
 ## History
 
+* 2022-09-11: Tested Apple M1 Metal support (MPS), but LSTM backward pass is still [broken](https://github.com/pytorch/pytorch/issues/80306), crashes because getting confused on tensor dimensions. (PyTorch 1.12.1 and nightly of 09/2022 both crash). Latest ml_indie_tools enabled.
 * 2022-03-12: [`ml_indie_tools`](https://github.com/domschl/ml-indie-tools) is used for Projekt Gutenberg access.
 * ongoing: support for direct Project Gutenberg queries for training data generation, various optimizations,
   usage of torch dataloaders.

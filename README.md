@@ -69,6 +69,7 @@ Model: 2x256, 64 steps
 
 ## History
 
+* 2022-12-13: Pytorch 2: Apple's MPS stuff still crashes on LSTM backward path. See also [pytorch github issue, triaged](https://github.com/pytorch/pytorch/issues/87579)
 * 2022-09-11: Tested Apple M1 Metal support (MPS), but LSTM backward pass is still [broken](https://github.com/pytorch/pytorch/issues/80306), crashes because getting confused on tensor dimensions. (PyTorch 1.12.1 and nightly of 09/2022 both crash). Latest ml_indie_tools enabled.
 * 2022-03-12: [`ml_indie_tools`](https://github.com/domschl/ml-indie-tools) is used for Projekt Gutenberg access.
 * ongoing: support for direct Project Gutenberg queries for training data generation, various optimizations,

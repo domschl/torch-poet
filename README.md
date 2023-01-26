@@ -67,6 +67,10 @@ Model: 2x256, 64 steps
 * Tesla V4 (Colab): 0.00012 sec/sample
 * Apple M1 (CPU): 0.0032 sec/sample (Note: at the time of tests there was no pytorch version that supports M1 GPU, hence the very slow result, update 09/2022: while there is now (09/2022) an implementation with GPU support, is crashes during LSTM backward path, so can't be tested, s.b.)
 
+## Apple Silicon Errata
+
+Since at the time of this writing, Apple's implementation of the LSTM backward path is broken, the model can't be trained on Apple Silicon. For Apple silicon have a look at [torch-transformer-poet](https://github.com/domschl/torch-transformer-poet) which uses transformers instead of LSTMs (easier to implement backward path :-) ). This works fine with local Apple Silicon, NVIDIA or Colab GPUs.
+
 ## History
 
 * 2022-12-13: Pytorch 2: Apple's MPS stuff still crashes on LSTM backward path. See also [pytorch github issue, triaged](https://github.com/pytorch/pytorch/issues/87579)
